@@ -4,7 +4,7 @@
 Este projeto explora o conceito de curvas braquistócronas, que são as trajetórias de descida mais rápida entre dois pontos sob a influência da gravidade. O trabalho inclui visualizações interativas usando a biblioteca Manim, demonstrando a comparação entre a cicloide (a curva braquistócrona) e uma linha reta, além de abordar o Princípio de Fermat, que relaciona a óptica com o conceito de minimização de tempo.
 
 ## Arquivos
-1. **`will(1).py`**:  
+1. **`Braqui.py`**:  
    - Demonstra a comparação entre uma linha reta e uma cicloide como soluções para o problema da braquistócrona.
    - Inclui animações de bolas percorrendo ambas as curvas, mostrando que a cicloide é mais rápida.
    - Explica as equações das curvas e fornece uma análise gráfica comparativa dos tempos de descida.
