@@ -18,16 +18,30 @@ class CicloideSequencial(Scene):
 
         ponto_A2 = Dot([-4, 2, 0], color=YELLOW)
         ponto_B2 = Dot([4, 2, 0], color=YELLOW)
+        # Rótulos A e B para os pontos amarelos
+        label_A2 = Text("A", font_size=20, font="Times").next_to(ponto_A2, LEFT)
+        label_B2 = Text("B", font_size=20, font="Times").next_to(ponto_B2, RIGHT)
+
         imagem_B = Dot([4, -5, 0], color=BLUE).set_opacity(0.5)
 
-        raio_inc = Line(ponto_A2.get_center(), [1, -1.5, 0], color=ORANGE)
-        raio_ref = Line([1, -1.5, 0], ponto_B2.get_center(), color=ORANGE)
+        # === Ponto de incidência P e normal ao espelho ===
+        P = np.array([1, -1.5, 0])  # ponto de reflexão
+        ponto_P = Dot(P, color=RED)
+        # >>> Ajuste solicitado: rótulo deslocado para baixo e direita
+        label_P = Text("P", font_size=20, font="Times").next_to(ponto_P, DOWN+RIGHT, buff=0.15)
+        normal_em_P = DashedLine(P + 2.5*UP, P + 2.5*DOWN, color=WHITE)
+
+        # Raios de incidência e reflexão usando explicitamente o ponto P
+        raio_inc = Line(ponto_A2.get_center(), P, color=ORANGE)
+        raio_ref = Line(P, ponto_B2.get_center(), color=ORANGE)
 
         linha_simetrica = Line(ponto_A2.get_center(), imagem_B.get_center(), color=WHITE).set_stroke(opacity=0.3)
 
         self.play(Write(titulo_reflexao), Create(espelho), Write(label_espelho))
-        self.play(FadeIn(ponto_A2), FadeIn(ponto_B2), FadeIn(imagem_B))
+        self.play(FadeIn(ponto_A2), FadeIn(ponto_B2), FadeIn(imagem_B), Write(label_A2), Write(label_B2))
         self.play(Create(raio_inc), Create(raio_ref), Create(linha_simetrica))
+        # Exibição do ponto P e da normal
+        self.play(FadeIn(ponto_P), Write(label_P), Create(normal_em_P))
         self.wait(3)
         self.play(*[FadeOut(m) for m in self.mobjects])
 
